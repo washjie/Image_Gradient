@@ -1,4 +1,5 @@
 #include "image_io.h"
+
 /*
 The function dose the following things:
 1. It calculates gradience of every pixel.
@@ -9,4 +10,4 @@ The function dose the following things:
 There are 8 direction: 0(g0), 45(g1), 90(g2), 135(g3), 180(g4), 225(g5), 270(g6), 315(g7), 360(g8).
 If degree of a pixel is 39.6, it will be classified as g1.(Since 39.6 degree is closer to 45 degree than the others.)
 */
-void image_routine(image_info image);
+void image_routine(image_info image, char* direction);
