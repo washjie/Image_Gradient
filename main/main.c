@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "image_io.h"
 #include "process.h"
 
