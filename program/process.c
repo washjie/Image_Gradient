@@ -4,12 +4,16 @@
 #include <stdlib.h>
 #include <math.h>
 
-/* function to calculate the gradient image at different angle */
-
-void image_routine(image_info image){
+/*
+This function calculates the gradient map for the original image. 
+Direction is determined by the char string parameter, 
+which could have the form: g1g2, g2g0, g1, g7g8, g9...
+*/
+void image_routine(image_info image, char* direction){
 	int i, j;
 	double val = 180.0 / PI;
 	image_info new_image;
+
 	new_image.image_arr = image_arr_allocate(image.width, image.height);
 	new_image.width = image.width;
 	new_image.height = image.height;
@@ -26,10 +30,9 @@ void image_routine(image_info image){
 				continue;
 			}
 
-			/* y cannot be 0 */
 			if (y == 0)
 				y = 0.001;
-			/* determines the direction */
+
 			double degree = atan(x/y) * val;
 			
 			if ((x < 0) && (y > 0)){
