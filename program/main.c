@@ -4,8 +4,10 @@
 /* started here */
 int main(int argc, char* argv[]){
 	
-	image_info image = read_image(argv[1]);	
-	image_routine(image);
+	if(argc == 2){
+		image_info image = read_image(argv[1]);	
+		image_routine(image);
+	}
 
 	return 0;
 }
