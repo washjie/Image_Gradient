@@ -3,6 +3,22 @@
 
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
+
+void direction_check(char * g_direct){
+	if(!g_direct)
+		return;
+
+	int l = (unsigned)strlen(g_direct);
+	if(l == 2){
+	}
+	else if(l == 4){
+	}
+	else{
+	}
+
+	return;
+}
 
 /*
 This function calculates the gradient map for the original image. 
