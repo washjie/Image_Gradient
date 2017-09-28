@@ -27,7 +27,7 @@ I will update this function later.
 */
 void write_image(const image_info image){
 	int i;
-	FILE * image_out = fopen(image.str, "wb");
+	FILE * image_out = fopen(image.filename, "wb");
 	
 	if(image_out){
 		fprintf(image_out, "P5\n%d %d\n%d\n", image.width, image.height, image.max_gray);
@@ -40,10 +40,10 @@ void write_image(const image_info image){
 /*
 In the pgm file, the format is like:
 
-P5		//The magic number for identifying the file type.
-700 465		//The width, height of the picture
-255		//The maximum gray value
-byte data...
+P5				//The magic number for identifying the file type.
+700 465			//The width, height of the picture
+255				//The maximum gray value
+byte data...	// image data started here
 
 So we first read the first three lines,(fscanf)
 allocate memory for the image array,(image_arr_allocate)
@@ -68,7 +68,7 @@ image_info read_image(char * image_file){
 			token = strtok(NULL, " ,./");
 			if(token){
 				if(strcmp(token, "pgm") == 0){
-					strcpy(image.str, prev_token);
+					strcpy(image.filename, prev_token);
 				}
 			}
 			

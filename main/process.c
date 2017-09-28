@@ -96,10 +96,10 @@ void image_routine(image_info image, char* direction){
 			}
 		}
 	}
-	strcpy(new_image.str, image.str);
-	strcat(new_image.str, "_");
-	strcat(new_image.str, direction);
-	strcat(new_image.str, ".pgm");
+	strcpy(new_image.filename, image.filename);
+	strcat(new_image.filename, "_");
+	strcat(new_image.filename, direction);
+	strcat(new_image.filename, ".pgm");
 
 	write_image(new_image);
 }
