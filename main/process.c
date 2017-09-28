@@ -12,12 +12,10 @@ int direction_check(char * g_direct, double *angle1, double *angle2){
 
 	int l = (unsigned)strlen(g_direct);
 	if(l == 2){
-		printf("g_direct[1] = %d\n", g_direct[1]-48);
 		*angle1 = g_direct[1]-48;
 		return 1;
 	}
 	else if(l == 4){
-		printf("g_direct[1] = %d, g_direct[3] = %d\n", g_direct[1]-48, g_direct[3]-48);
 		*angle1 = g_direct[1]-48;
 		*angle2 = g_direct[3]-48;
 		return 2;
@@ -42,10 +40,11 @@ void image_routine(image_info image, char* direction){
 
 	new_image.image_arr = image_arr_allocate(image.width, image.height);
 	
-	double *angle1, *angle2;
-	int mode = direction_check(direction, angle1, angle2);
+	double angle1;
+	double angle2;
+	int mode = direction_check(direction, &angle1, &angle2);
 	double first, second;
-
+	
 	for(i = 1; i < image.height - 1; ++i){
 		for(j = 1; j < image.width - 1; ++j){
 			/* calculate the gadient */
@@ -76,18 +75,18 @@ void image_routine(image_info image, char* direction){
 			}
 
 			if(mode == 2){
-				first = fabs(*angle1 - degree);
-				second = fabs(*angle2 - degree);
-				if(first < 30)
+				first = fabs(angle1 * 45 - degree);
+				second = fabs(angle2 * 45 - degree);
+				if(first < 40)
 					new_image.image_arr[i][j] = 0;
-				else if (second < 30)
+				else if (second < 40)
 					new_image.image_arr[i][j] = 255;
 				else
 					new_image.image_arr[i][j] = 128;
 			}
 			else if(mode == 1){
-				double first = fabs(*angle1 - degree);
-				if(first < 30)
+				double first = fabs(angle1 * 45 - degree);
+				if(first < 40)
 					new_image.image_arr[i][j] = 0;
 				else
 					new_image.image_arr[i][j] = 128;
@@ -97,6 +96,10 @@ void image_routine(image_info image, char* direction){
 			}
 		}
 	}
+	strcpy(new_image.str, image.str);
+	strcat(new_image.str, "_");
+	strcat(new_image.str, direction);
+	strcat(new_image.str, ".pgm");
 
-
+	write_image(new_image);
 }

@@ -12,4 +12,5 @@ typedef struct image_data{
 	int height; 
 	int max_gray;
 	ARRAY_TYPE ** image_arr;
+	char str[100];
 } image_info;
